@@ -1,14 +1,5 @@
-# Dataset-level references for the three cases in the paper.
-# Not read by run_m3.
-# A null reference means the quantity is per-case or Mach-dependent.
-
-aliases:
-  ahmed: ahmedml
-  ahmed_ml: ahmedml
-  drivaer: drivaerml
-  drivaer_ml: drivaerml
-  wing: shift_wing
-  shiftwing: shift_wing
+# Reference quantities. run_m3 does not read this file.
+# A missing value is per-case or depends on Mach.
 
 datasets:
   ahmedml:

@@ -1,8 +1,6 @@
-"""M³ pipeline: Partition, Group, Sample.
+"""Partition, group, and sample.
 
-``run_m3`` is the public entry point. Octree depth, variation weights, stratum
-count, the per-cell fill cap, and inter-level backflow come from
-``hyperparameters.yaml`` unless the call overrides them.
+``run_m3`` reads ``hyperparameters.yaml`` unless the call overrides those values.
 """
 
 from __future__ import annotations

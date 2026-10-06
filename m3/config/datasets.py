@@ -1,11 +1,6 @@
-"""Reference quantities for public datasets.
+"""Reference quantities for AhmedML, DrivAerML, and SHIFT-Wing.
 
-Sampling does not read this file. ``run_m3`` only needs coordinates and fields.
-The table is here so a downstream script can use the same freestream, dynamic
-pressure, and reference length as the dataset papers.
-
-Values are dataset-level. Per-case reference area and Mach-dependent dynamic
-pressure stay null, with a short note instead of a single number.
+``run_m3`` does not read them.
 """
 
 from __future__ import annotations
@@ -102,9 +97,6 @@ def _load_yaml_payload() -> Dict[str, Any]:
 _PAYLOAD = _load_yaml_payload()
 _FIELD_NAMES = {f.name for f in fields(DatasetNormConfig)}
 
-DATASET_ALIASES: Dict[str, str] = {
-    str(k): str(v) for k, v in (_PAYLOAD.get("aliases") or {}).items()
-}
 DATASET_NORM_CONFIGS: Dict[str, DatasetNormConfig] = {
     str(k): DatasetNormConfig(**{name: val for name, val in v.items() if name in _FIELD_NAMES})
     for k, v in (_PAYLOAD.get("datasets") or {}).items()
@@ -113,8 +105,7 @@ DATASET_NORM_CONFIGS: Dict[str, DatasetNormConfig] = {
 
 def normalize_dataset_key(name: str) -> str:
     key = str(name).strip().lower()
-    key = key.replace(" ", "_").replace("-", "_")
-    return DATASET_ALIASES.get(key, key)
+    return key.replace(" ", "_").replace("-", "_")
 
 
 def get_dataset_norm_config(name: str) -> DatasetNormConfig:

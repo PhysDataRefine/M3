@@ -1,7 +1,4 @@
-"""Config helpers for dataset-level dimensionless references."""
-
 from .datasets import (
-    DATASET_ALIASES,
     DATASET_NORM_CONFIGS,
     DatasetNormConfig,
     get_dataset_norm_config,
@@ -10,7 +7,6 @@ from .datasets import (
 )
 
 __all__ = [
-    "DATASET_ALIASES",
     "DATASET_NORM_CONFIGS",
     "DatasetNormConfig",
     "get_dataset_norm_config",
