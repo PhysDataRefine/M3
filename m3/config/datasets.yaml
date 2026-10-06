@@ -1,0 +1,67 @@
+# Dataset-level references for the three cases in the paper.
+# Not read by run_m3.
+# A null reference means the quantity is per-case or Mach-dependent.
+
+aliases:
+  ahmed: ahmedml
+  ahmed_ml: ahmedml
+  drivaer: drivaerml
+  drivaer_ml: drivaerml
+  wing: shift_wing
+  shiftwing: shift_wing
+
+datasets:
+  ahmedml:
+    n_cases: 500
+    size_tb: 2.0
+    solver_family: "OpenFOAM HRLES, SA-DDES"
+    streamwise_axis: "+x"
+    length_ref: 1.044
+    length_ref_name: "L body, m"
+    area_ref: 0.112
+    area_ref_name: A_ref_m2
+    u_inf: 1.0
+    reynolds_ref: 2.78e6
+    reynolds_ref_name: "Re_L. The dataset paper also reports Re_H = 7.68e5."
+    rho_ref: 1.0
+    nu_ref: 3.75e-7
+    q_ref: 0.5
+    p_ref: 0.0
+    raw_pos_min: -4.0
+    raw_pos_max: 6.0
+
+  drivaerml:
+    n_cases: 500
+    size_tb: 31.0
+    solver_family: "OpenFOAM HRLES, SA-sigma-DDES"
+    streamwise_axis: "+x"
+    vertical_axis: "+z"
+    length_ref: 4.0
+    length_ref_name: "wheelbase used for Re_L, m. Body length is per-case, about 2.6 to 3.0 m."
+    area_ref_name: "per-case A_ref from geo_ref_i.csv"
+    u_inf: 38.889
+    reynolds_ref: 7.19e6
+    reynolds_ref_name: Re_L_wheelbase
+    rho_ref: 1.0
+    nu_ref: 1.507e-5
+    temperature_ref: 293.15
+    p_ref: 0.0
+    q_ref: 756.1771605
+    raw_pos_min: -40.0
+    raw_pos_max: 80.0
+    note: "q_ref = 0.5 * rho_ref * u_inf^2."
+
+  shift_wing:
+    n_cases: 1698
+    size_tb: 10.2
+    solver_family: "Luminary Cloud RANS, Spalart-Allmaras"
+    streamwise_axis: "+x"
+    vertical_axis: "+z"
+    length_ref: 62.7264
+    length_ref_name: "streamwise hull length, m"
+    rho_ref: 0.37949285594610055
+    temperature_ref: 218.81
+    p_ref: 23840.0
+    raw_pos_min: -1000.0
+    raw_pos_max: 1000.0
+    note: "q_ref depends on Mach. About 4172 at Mach 0.5 and about 12058 at Mach 0.85. Re is per-case."

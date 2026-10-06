@@ -1,0 +1,38 @@
+# Paper defaults. Surface and volume share this file.
+# SHIFT-Wing in the paper uses the same table with weight_v: 0.1.
+
+octree:
+  # G_max. A cell stops splitting at this depth.
+  boundary_max_level: 8
+  volume_max_level: 13
+
+  # ε_refine. A cell also stops when δ_c = max(w_φ Δφ, w_ψ Δψ) falls to this value.
+  boundary_epsilon_refine: 0.05
+  volume_epsilon_refine: 0.005
+
+  # δ_c = max(weight_p * Δφ_c, weight_v * Δψ_c)
+  weight_p: 1.0
+  weight_v: 0.4
+
+  # K equal-width bins of S_c = log(ε + δ_c / h_c). Multi-point cells use 1..K.
+  # Singleton cells (|P_c| = 1) are placed in stratum K+1.
+  effective_strata_bins: 64
+
+  # Percentile clip of S_c before binning, in [0, 100].
+  # [null, 99.9] keeps the sample minimum and clips the upper tail at P99.9.
+  # Omit the key, or set it to null, to bin on the raw min–max of this case.
+  log_strata_quantiles: [null, 99.9]
+
+  # Optional shared bin edges in S_c units, [S_lo, S_hi].
+  # When set, they override log_strata_quantiles so every case uses the same scale axis.
+  # The paper runs leave this unset and bin each case on its own quantiles.
+  log_strata_fixed_range: null
+
+sampling:
+  # ρ. Each cell may contribute at most ceil(ρ N_c) points.
+  # null or a value >= 1 disables the cap.
+  max_cell_fill_ratio: 0.3
+
+  # Inter-level budget: uniform split, clamp by capacity, then give the overflow
+  # back to strata that still have room. false keeps the clamp and drops the overflow.
+  enable_inter_level_backflow: true
